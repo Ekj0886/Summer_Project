@@ -29,7 +29,8 @@ endif
 .PHONY: all install check clean
 
 # Name of the executable
-TARGET = Image_Processing Data_Loader_Example
+# TARGET = Image_Processing Data_Loader_Example
+TARGET = Data_Loader_Example
 
 all: $(TARGET)
 
