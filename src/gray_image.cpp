@@ -15,7 +15,7 @@ bool GrayImage::LoadImage(string file) {
 }
 
 void GrayImage::DumpImage(string file) {
-    data_loader.Dump_Gray(w, h, pixels,string("Gray_" + file));
+    data_loader.Dump_Gray(w, h, pixels, string("Gray_" + file));
     return;
 }
 
@@ -25,7 +25,11 @@ void GrayImage::Display_ASCII() {
 }
 
 void GrayImage::Display_CMD() {
-    data_loader.Display_Gray_ASCII(w, h, pixels);
+    string file = "CMD_Gray.jpg";
+    data_loader.DumpImage(w, h, pixels, file);
+    data_loader.Display_Gray_ASCII(file);
+    const string cmd_str = "rm" + file;
+    system(cmd_str.c_str());
     return;
 }
 
