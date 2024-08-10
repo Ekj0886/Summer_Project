@@ -26,8 +26,8 @@ void GrayImage::Display_ASCII() {
 
 void GrayImage::Display_CMD() {
     string file = "CMD_Gray.jpg";
-    data_loader.DumpImage(w, h, pixels, file);
-    data_loader.Display_Gray_ASCII(file);
+    data_loader.Dump_Gray(w, h, pixels, file);
+    data_loader.Display_Gray_CMD(file);
     const string cmd_str = "rm" + file;
     system(cmd_str.c_str());
     return;

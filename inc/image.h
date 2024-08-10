@@ -19,8 +19,8 @@ public:
     int get_h();
 
 // virtual function
-    virtual bool LoadImage(string file);
-    virtual void DumpImage(string file);
+    virtual bool LoadImage(string file) = 0;
+    virtual void DumpImage(string file) = 0;
     virtual void Display_ASCII(){};
     virtual void Display_CMD(){};
 };

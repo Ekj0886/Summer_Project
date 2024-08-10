@@ -31,8 +31,8 @@ void RGBImage::Display_ASCII() {
 
 void RGBImage::Display_CMD() {
     string file = "CMD_RGB.jpg";
-    data_loader.DumpImage(w, h, pixels, file);
-    data_loader.Display_RGB_ASCII(file);
+    data_loader.Dump_RGB(w, h, pixels, file);
+    data_loader.Display_RGB_CMD(file);
     const string cmd_str = "rm" + file;
     system(cmd_str.c_str());
     return;
