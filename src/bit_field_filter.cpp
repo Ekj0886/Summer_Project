@@ -8,7 +8,7 @@ Filter::~Filter() {
     ;
 }
 
-void Filter::PutFilter_Gray(int8_t option) {
+void Filter::PutFilter_Gray(int8_t option, string out_img) {
 
     Image *img = new GrayImage();
     img->LoadImage(file);
@@ -22,11 +22,13 @@ void Filter::PutFilter_Gray(int8_t option) {
     if(option & Mosaic  ) img->Mosaic_Filter();
 
     img->Display_CMD();
-    img->DumpImage("Filtered_img.jpg");
+    img->DumpImage(out_img);
+    
     return;
+
 }
 
-void Filter::PutFilter_RGB(int8_t option) {
+void Filter::PutFilter_RGB(int8_t option, string out_img) {
     
     Image *img = new RGBImage();
     img->LoadImage(file);
@@ -40,7 +42,8 @@ void Filter::PutFilter_RGB(int8_t option) {
     if(option & Mosaic  ) img->Mosaic_Filter();
 
     img->Display_CMD();
-    img->DumpImage("Filtered_img.jpg");
+    img->DumpImage(out_img);
+
     return;
 
 }

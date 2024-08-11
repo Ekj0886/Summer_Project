@@ -19,17 +19,25 @@ int main(int argc, char *argv[]){
     // img2->Display_CMD(); 
     // img2->Display_ASCII();
 
-    // // some bit field filter design driven code here
-    // Image *girl_img = new RGBImage();
-    // girl_img->LoadImage("Image-Folder/girl_2x.png");
+// some bit field filter design driven code here
 
+    // case1
     int8_t option = Box;
-    Filter filter("Image-Folder/lena.jpg");
-    filter.PutFilter_RGB(option);
+    string dir     = "Image-Folder/";
+    string img     = "lena.jpg";
+    string out_img = "Box_" + img;
+    
+    Filter filter(dir + img);
+    filter.PutFilter_RGB(option, out_img);
 
-    // Image *box_img = 
-
+    
     // some photo mosaic driven code here
+    string img_src = "Image-Folder/cifar10";
+    string img     = "Image-Folder/girl_2x.png";
+
+
+
+
 
     // more ...
     return 0;
