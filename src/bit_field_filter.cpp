@@ -22,7 +22,8 @@ void Filter::PutFilter_Gray(int8_t option) {
     if(option & Mosaic  ) img->Mosaic_Filter();
 
     img->Display_CMD();
-
+    img->DumpImage("Filtered_img.jpg");
+    return;
 }
 
 void Filter::PutFilter_RGB(int8_t option) {
@@ -39,6 +40,7 @@ void Filter::PutFilter_RGB(int8_t option) {
     if(option & Mosaic  ) img->Mosaic_Filter();
 
     img->Display_CMD();
+    img->DumpImage("Filtered_img.jpg");
     return;
 
 }
