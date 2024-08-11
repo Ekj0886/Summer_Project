@@ -3,9 +3,11 @@
 
 #include "image.h"
 
-class GrayImage : public Image{
+class GrayImage : public Image {
+
 private:
     int **pixels;
+
 public:
     GrayImage();
     GrayImage(int width, int height, int **pixels);
@@ -14,6 +16,12 @@ public:
     void DumpImage(string file);
     void Display_ASCII();
     void Display_CMD();
+
+    void Box_Filter  (int k);
+    void Sobel_Filter();
+    void Contrast_Filter();
+    void Mosaic_Filter();
+
 };
 
 #endif

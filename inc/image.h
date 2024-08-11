@@ -23,6 +23,10 @@ public:
     virtual void DumpImage(string file) = 0;
     virtual void Display_ASCII(){};
     virtual void Display_CMD(){};
+    virtual void Box_Filter  (int k){};
+    virtual void Sobel_Filter(){};
+    virtual void Contrast_Filter(){};
+    virtual void Mosaic_Filter(){};
 };
 
 #endif

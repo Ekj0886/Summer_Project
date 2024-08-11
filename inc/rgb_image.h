@@ -3,9 +3,11 @@
 
 #include "image.h"
 
-class RGBImage : public Image{
+class RGBImage : public Image {
+
 private:
     int ***pixels;
+    
 public:
     RGBImage();
     RGBImage(int width, int height, int ***pixels);
@@ -14,6 +16,12 @@ public:
     void DumpImage(string file);
     void Display_ASCII();
     void Display_CMD();
+
+    void Box_Filter  (int k);
+    void Sobel_Filter();
+    void Contrast_Filter();
+    void Mosaic_Filter();
+
 };
 
 #endif
