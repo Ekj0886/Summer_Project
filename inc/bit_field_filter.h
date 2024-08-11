@@ -20,8 +20,8 @@ private:
 public:
     Filter(string filename);
     ~Filter();
-    void PutFilter_Gray(int8_t option);
-    void PutFilter_RGB (int8_t option);
+    void PutFilter_Gray(int8_t option, string out_img);
+    void PutFilter_RGB (int8_t option, string out_img);
 
 };
 

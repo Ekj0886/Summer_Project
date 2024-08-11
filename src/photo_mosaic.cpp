@@ -4,11 +4,12 @@ void PhotoMosaic::GetRGB_val(string src) {
     vector<string> files;
     data_loader.List_Directory(src, files);
 
-    for(int i = 0; i < files.size(); i++) {
-    
+    cout << "start GetRGB_val" << endl;
+    for(unsigned int i = 0; i < files.size(); i++) {
+
         // record loaded img
         RGBImage *small_img = new RGBImage();
-        small_img->Load(files[i]);
+        small_img->LoadImage(files[i]);
         small_imgs.push_back(small_img);
 
         // compute RGB_val
@@ -49,4 +50,6 @@ PhotoMosaic::~PhotoMosaic() {
 
 RGBImage *PhotoMosaic::GetMosaic(){
     
+    return img;
+
 }

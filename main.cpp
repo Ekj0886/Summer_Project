@@ -22,22 +22,22 @@ int main(int argc, char *argv[]){
 // some bit field filter design driven code here
 
     // case1
-    int8_t option = Box;
-    string dir     = "Image-Folder/";
-    string img     = "lena.jpg";
-    string out_img = "Box_" + img;
+    // int8_t option = Box;
+    // string dir     = "Image-Folder/";
+    // string img     = "lena.jpg";
+    // string out_img = "Box_" + img;
     
-    Filter filter(dir + img);
-    filter.PutFilter_RGB(option, out_img);
+    // Filter filter(dir + img);
+    // filter.PutFilter_RGB(option, out_img);
 
-    
+
     // some photo mosaic driven code here
-    string img_src = "Image-Folder/cifar10";
-    string img     = "Image-Folder/girl_2x.png";
+    string src    = "Image-Folder/cifar10";
+    string target = "Image-Folder/girl_2x.png";
 
-
-
-
+    PhotoMosaic mosaic (target, src); 
+    RGBImage *mosaic_img = mosaic.GetMosaic();
+    mosaic_img->Display_CMD();
 
     // more ...
     return 0;

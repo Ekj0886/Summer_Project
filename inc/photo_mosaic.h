@@ -7,7 +7,7 @@
 struct pix {
     int R;
     int G;
-    int B
+    int B;
 };
 
 class PhotoMosaic : public RGBImage{

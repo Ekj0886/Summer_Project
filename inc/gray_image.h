@@ -17,7 +17,7 @@ public:
     void Display_ASCII();
     void Display_CMD();
 
-    void Box_Filter  (int k, string out_img);
+    void Box_Filter  (int k);
     void Sobel_Filter();
     void Contrast_Filter();
     void Mosaic_Filter();
