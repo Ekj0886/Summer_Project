@@ -91,8 +91,10 @@ RGBImage *PhotoMosaic::GetMosaic(){
             for(unsigned int i = 0; i < RGB_val.size(); i++) {
                 pix p = RGB_val[i];
                 int diff_new = pow((g.R - p.R), 2) + pow((g.G - p.G), 2) + pow((g.B - p.B), 2);
-                sml = (diff_new < diff_min)? i : sml;
-                diff_min = diff_new;
+                if(diff_new < diff_min) {
+                    sml = i;
+                    diff_min = diff_new;
+                }
             }
             
             // get mosaic img

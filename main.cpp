@@ -33,7 +33,7 @@ int main(int argc, char *argv[]){
 
     // some photo mosaic driven code here
     string src    = "Image-Folder/cifar10";
-    string target = "Image-Folder/girl_2x.png";
+    string target = "Image-Folder/4k_owl.jpg";
 
     PhotoMosaic mosaic (target, src); 
     RGBImage *mosaic_img = mosaic.GetMosaic();
