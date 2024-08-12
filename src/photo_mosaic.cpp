@@ -50,6 +50,30 @@ PhotoMosaic::~PhotoMosaic() {
 
 RGBImage *PhotoMosaic::GetMosaic(){
     
+    int h_sml = small_imgs[0]->get_h();
+    int w_sml = small_imgs[0]->get_w();
+
+    int h_big = img->get_h();
+    int w_big = img->get_w();
+
+    cout << "origin: " << h_big << " " << w_big << endl;
+
+    // crop the image
+    int h = h_big - (h_big % h_sml);
+    int w = w_big - (w_big % w_sml);
+
+    int ***pixels = img->pixels;
+    
+    cout << "compute: " << h << " " << w << endl;
+
+    data_loader.Dump_RGB(w, h, pixels, "crop.jpg");
+    img->LoadImage("crop.jpg");
+
+    const string cmd_str = "rm crop.jpg";
+    system(cmd_str.c_str());
+
+    cout << "crop: " << img->get_h() << " " << img->get_w() << endl;
+
     return img;
 
 }
