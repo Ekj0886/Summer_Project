@@ -37,7 +37,8 @@ int main(int argc, char *argv[]){
 
     PhotoMosaic mosaic (target, src); 
     RGBImage *mosaic_img = mosaic.GetMosaic();
-    // mosaic_img->Display_CMD();
+    mosaic_img->Display_CMD();
+    mosaic_img->DumpImage("Mosaic_img.jpg");
 
     // more ...
     return 0;

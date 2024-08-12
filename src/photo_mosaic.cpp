@@ -4,7 +4,8 @@ void PhotoMosaic::GetRGB_val(string src) {
     vector<string> files;
     data_loader.List_Directory(src, files);
 
-    cout << "start GetRGB_val" << endl;
+    cout << "Start loading source images" << endl;
+
     for(unsigned int i = 0; i < files.size(); i++) {
 
         // record loaded img
@@ -17,8 +18,7 @@ void PhotoMosaic::GetRGB_val(string src) {
         int h = small_img->get_h();
         int w = small_img->get_w();
 
-        pix p;
-        p.R = 0, p.G = 0, p.B = 0;
+        pix p = {0, 0, 0};
         for(int y = 0; y < h; y++) {
             for(int x = 0; x < w; x++) {
 
@@ -33,6 +33,7 @@ void PhotoMosaic::GetRGB_val(string src) {
         RGB_val.push_back(p);
 
     }
+    cout << "Image source loading complete" << endl;
 }
 
 PhotoMosaic::PhotoMosaic(string target, string src) {
@@ -50,21 +51,18 @@ PhotoMosaic::~PhotoMosaic() {
 
 RGBImage *PhotoMosaic::GetMosaic(){
     
-    int h_sml = small_imgs[0]->get_h();
-    int w_sml = small_imgs[0]->get_w();
+    cout << "Generating mosaic image" << endl;
 
-    int h_big = img->get_h();
-    int w_big = img->get_w();
-
-    cout << "origin: " << h_big << " " << w_big << endl;
+    int h_s = small_imgs[0]->get_h();
+    int w_s = small_imgs[0]->get_w();
+    int h_b = img->get_h();
+    int w_b = img->get_w();
 
     // crop the image
-    int h = h_big - (h_big % h_sml);
-    int w = w_big - (w_big % w_sml);
+    int h = h_b - (h_b % h_s);
+    int w = w_b - (w_b % w_s);
 
     int ***pixels = img->pixels;
-    
-    cout << "compute: " << h << " " << w << endl;
 
     data_loader.Dump_RGB(w, h, pixels, "crop.jpg");
     img->LoadImage("crop.jpg");
@@ -72,7 +70,44 @@ RGBImage *PhotoMosaic::GetMosaic(){
     const string cmd_str = "rm crop.jpg";
     system(cmd_str.c_str());
 
-    cout << "crop: " << img->get_h() << " " << img->get_w() << endl;
+    for(int y = 0; y <= h - h_s; y += h_s) {
+        for(int x = 0; x <= w - w_s; x += w_s) {
+            
+            // y, x is the each starting point of the grid
+            pix g = {0, 0, 0};
+            for(int i = y; i < y + h_s; i++) {
+                for(int j = x; j < x + w_s; j++) {
+                    // i, j is the individual pixel of the grid
+                    g.R += img->pixels[i][j][0];
+                    g.G += img->pixels[i][j][1];
+                    g.B += img->pixels[i][j][2];
+                }
+            }
+            g.R /= (h_s*w_s), g.G /= (h_s*w_s), g.B /= (h_s*w_s);
+
+            // find smallest diff
+            int sml = 0;
+            int diff_min = 255*255*3;
+            for(unsigned int i = 0; i < RGB_val.size(); i++) {
+                pix p = RGB_val[i];
+                int diff_new = pow((g.R - p.R), 2) + pow((g.G - p.G), 2) + pow((g.B - p.B), 2);
+                sml = (diff_new < diff_min)? i : sml;
+                diff_min = diff_new;
+            }
+            
+            // get mosaic img
+            int *** sml_pixels = small_imgs[sml]->pixels;
+            for(int i = y; i < y + h_s; i++) {
+                for(int j = x; j < x + w_s; j++) {
+                    // i, j is the individual pixel of the grid
+                    img->pixels[i][j][0] = sml_pixels[i-y][j-x][0];
+                    img->pixels[i][j][1] = sml_pixels[i-y][j-x][1];
+                    img->pixels[i][j][2] = sml_pixels[i-y][j-x][2];
+                }
+            }
+
+        }
+    }
 
     return img;
 
